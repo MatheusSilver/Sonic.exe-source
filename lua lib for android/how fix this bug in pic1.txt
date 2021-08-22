@@ -1,0 +1,5 @@
+just copy arm/libluajit.so to export\release\android\bin\app\build\intermediates\merged_jni_libs\debug\ohillsut\armeabi-v7a
+
+dont froget compile with '-D NO_PRECOMPILED_HEADERS'
+
+and copy linc_luajit to your lib folder, maybe in c:\HaxeToolkit\lib

@@ -27,7 +27,7 @@ class Character extends FlxSprite
 		this.isPlayer = isPlayer;
 
 		var tex:FlxAtlasFrames;
-		antialiasing = true;
+		antialiasing = false;
 
 		switch (curCharacter)
 		{
@@ -112,7 +112,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('idle', 'SONICmoveIDLE', 24);
 				animation.addByPrefix('singUP', 'SONICmoveUP', 24);
 				animation.addByPrefix('singRIGHT', 'SONICmoveRIGHT', 24);
-				animation.addByPrefix('singDOWN', 'SONICmoveDOWN', 24);
+				animation.addByPrefix('singDOWN', 'SONICmoveOWN', 24);
 				animation.addByPrefix('singLEFT', 'SONICmoveLEFT', 24);
 
 				animation.addByPrefix('singDOWN-alt', 'SONIClaugh', 24);
@@ -137,7 +137,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('idle', 'SONICFUNIDLE', 24);
 				animation.addByPrefix('singUP', 'SONICFUNUP', 24);
 				animation.addByPrefix('singRIGHT', 'SONICFUNRIGHT', 24);
-				animation.addByPrefix('singDOWN', 'SONICFUNDOWN', 24);
+				animation.addByPrefix('singDOWN', 'SONICFUNOWN', 24);
 				animation.addByPrefix('singLEFT', 'SONICFUNLEFT', 24);
 	
 				addOffset('idle', -21, 189);
@@ -152,7 +152,7 @@ class Character extends FlxSprite
 				frames = Paths.getSparrowAtlas('characters/SONIC_X');
 				animation.addByPrefix('idle', 'sonicX IDLE', 24, false);
 				animation.addByPrefix('singUP', 'sonicx UP', 24, false);
-				animation.addByPrefix('singDOWN', 'sonicx DOWN', 24, false);
+				animation.addByPrefix('singDOWN', 'sonicx OWN', 24, false);
 				animation.addByPrefix('singLEFT', 'sonicx LEFT', 24, false);
 				animation.addByPrefix('singRIGHT', 'sonicx RIGHT', 24, false);
 					
@@ -162,7 +162,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT",51, -15);
 				addOffset("singDOWN", 16, -62);
 	
-				antialiasing = true;
+				antialiasing = false;
 
 				playAnim('idle');
 		}

@@ -17,9 +17,7 @@ class VideoHandlerMP4
 	public static var netStream:NetStream;
 	public static var finishCallback:FlxState;
 
-	#if desktop
 	public static var vlcBitmap:VlcBitmap;
-	#end
 
 	public function new()
 	{
@@ -78,7 +76,6 @@ class VideoHandlerMP4
 		netStream.play(videoPath);
 	}
 
-	#if desktop
 	public function playMP4(path:String, callback:FlxState, ?repeat:Bool = false, ?isWindow:Bool = false, ?isFullscreen:Bool = false):Void
 	{
 		finishCallback = callback;
@@ -138,7 +135,6 @@ class VideoHandlerMP4
 			LoadingState.loadAndSwitchState(finishCallback);
 		}
 	}
-	#end
 
 	/////////////////////////////////////////////////////////////////////////////////////
 

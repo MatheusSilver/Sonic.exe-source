@@ -104,7 +104,7 @@ class Replay
 		var time = Date.now().getTime();
 
 		#if sys
-		File.saveContent("assets/replays/replay-" + PlayState.SONG.song + "-time" + time + ".kadeReplay", data);
+		File.saveContent(Main.path + "assets/replays/replay-" + PlayState.SONG.song + "-time" + time + ".kadeReplay", data);
 
 		path = "replay-" + PlayState.SONG.song + "-time" + time + ".kadeReplay"; // for score screen shit
 
@@ -117,10 +117,10 @@ class Replay
 	public function LoadFromJSON()
 	{
 		#if sys
-		trace('loading ' + Sys.getCwd() + 'assets/replays/' + path + ' replay...');
+		trace('loading ' + #if android Main.path #else Sys.getCwd() #end + 'assets/replays/' + path + ' replay...');
 		try
 		{
-			var repl:ReplayJSON = cast Json.parse(File.getContent(Sys.getCwd() + "assets/replays/" + path));
+			var repl:ReplayJSON = cast Json.parse(File.getContent(#if android Main.path #else Sys.getCwd() #end + "assets/replays/" + path));
 			replay = repl;
 		}
 		catch(e)

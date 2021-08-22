@@ -1,0 +1,21 @@
+diff a/source/ResultsScreen.hx b/source/ResultsScreen.hx	(rejected hunks)
+@@ -161,6 +161,10 @@ class ResultsScreen extends FlxSubState
+ 
+         cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+ 
++        #if mobileC
++		addVirtualPad(NONE, A);
++		#end
++
+ 		super.create();
+ 	}
+ 
+@@ -174,7 +178,7 @@ class ResultsScreen extends FlxSubState
+ 
+         // keybinds
+ 
+-        if (PlayerSettings.player1.controls.ACCEPT)
++        if (controls.ACCEPT)
+         {
+             music.fadeOut(0.3);
+             

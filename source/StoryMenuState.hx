@@ -41,6 +41,12 @@ class StoryMenuState extends MusicBeatState
     override function create()
     {
 
+		if (FlxG.sound.music != null)
+		{
+			if (!FlxG.sound.music.playing)
+				FlxG.sound.playMusic(Paths.music('storymodemenumusic'));
+		}
+
         FlxG.sound.playMusic(Paths.music('storymodemenumusic'));
         
         var bg:FlxSprite;
@@ -50,7 +56,7 @@ class StoryMenuState extends MusicBeatState
 		bg.animation.addByPrefix('idlexd', "damfstatic", 24);
 		bg.animation.play('idlexd');
 		bg.alpha = 1;
-		bg.antialiasing = true;
+		bg.antialiasing = false;
 		bg.setGraphicSize(Std.int(bg.width));
 		bg.updateHitbox();
 		add(bg);
@@ -61,7 +67,7 @@ class StoryMenuState extends MusicBeatState
         var greyBOX:FlxSprite;
 		greyBOX = new FlxSprite(0,0).loadGraphic(Paths.image('greybox'));
 		bg.alpha = 1;
-		greyBOX.antialiasing = true;
+		greyBOX.antialiasing = false;
 		greyBOX.setGraphicSize(Std.int(bg.width));
 		greyBOX.updateHitbox();
 		add(greyBOX);
@@ -72,7 +78,7 @@ class StoryMenuState extends MusicBeatState
 		bfIDLELAWL.scale.y = .4;
 		bfIDLELAWL.screenCenter();
 		bfIDLELAWL.y += 50;
-		bfIDLELAWL.antialiasing = true;
+		bfIDLELAWL.antialiasing = false;
 		bfIDLELAWL.animation.play('idleLAWLAW', true);
 		add(bfIDLELAWL);
 
@@ -83,7 +89,7 @@ class StoryMenuState extends MusicBeatState
 		staticscreen.animation.play('screenstaticANIM');
         staticscreen.y += 79;
 		staticscreen.alpha = 1;
-		staticscreen.antialiasing = true;
+		staticscreen.antialiasing = false;
 		staticscreen.setGraphicSize(Std.int(staticscreen.width * 0.275));
 		staticscreen.updateHitbox();
 		add(staticscreen);
@@ -92,7 +98,7 @@ class StoryMenuState extends MusicBeatState
         var yellowBOX:FlxSprite;
 		yellowBOX = new FlxSprite(0,0).loadGraphic(Paths.image('yellowbox'));
 		yellowBOX.alpha = 1;
-		yellowBOX.antialiasing = true;
+		yellowBOX.antialiasing = false;
 		yellowBOX.setGraphicSize(Std.int(bg.width));
 		yellowBOX.updateHitbox();
 		add(yellowBOX);
@@ -100,7 +106,7 @@ class StoryMenuState extends MusicBeatState
         
 		redBOX = new FlxSprite(0,0).loadGraphic(Paths.image('redbox'));
 		redBOX.alpha = 1;
-		redBOX.antialiasing = true;
+		redBOX.antialiasing = false;
 		redBOX.setGraphicSize(Std.int(bg.width));
 		redBOX.updateHitbox();
 		add(redBOX);
@@ -135,6 +141,9 @@ class StoryMenuState extends MusicBeatState
         sprDifficulty.offset.x = 70;
         sprDifficulty.y = leftArrow.y + 10;
 
+		addVirtualPad(UP_DOWN, A_B);
+
+
         super.create();
     }
 
@@ -167,20 +176,18 @@ class StoryMenuState extends MusicBeatState
 
     override public function update(elapsed:Float)
     {
-        if (controls.LEFT) leftArrow.animation.play('press');
-        else leftArrow.animation.play('idle'); 
+        if (controls.UP_P) changediff(-1);
 
-        if (controls.LEFT_P) changediff(-1);
-
-        if (controls.RIGHT) rightArrow.animation.play('press');
-        else rightArrow.animation.play('idle'); 
-
-        if (controls.RIGHT_P) changediff(1);
+        if (controls.DOWN_P) changediff(1);
 
         if (controls.BACK)
 		{
-            FlxG.sound.play(Paths.sound('cancelMenu'));
-			FlxG.switchState(new MainMenuState());
+			new FlxTimer().start(1, function(tmr:FlxTimer)
+			{
+				FlxG.camera.fade(FlxColor.BLACK, 1, false, function(){
+						FlxG.switchState(new MainMenuState()); // Copiei e colei por que sim!!! e foudase
+				});
+			});
 		}
 
         if (controls.ACCEPT)
@@ -208,12 +215,12 @@ class StoryMenuState extends MusicBeatState
                 PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + curDifficulty, PlayState.storyPlaylist[0].toLowerCase());
                 PlayState.storyWeek = 1;
                 PlayState.campaignScore = 0;
-                new FlxTimer().start(1, function(tmr:FlxTimer)
-                {
-                    //LoadingState.loadAndSwitchState(new PlayState(), true); //save this code for the cutsceneless build of the game
-                    var video:MP4Handler = new MP4Handler();
-                    video.playMP4(Paths.video('tooslowcutscene1'), new PlayState()); 
-                });
+			new FlxTimer().start(1, function(tmr:FlxTimer)
+			{
+				FlxG.camera.fade(FlxColor.BLACK, 1, false, function(){
+						LoadingState.loadAndSwitchState(new VideoState('assets/videos/tooslowcutscene1', new PlayState())); 
+				});
+			});
                 
             }
 

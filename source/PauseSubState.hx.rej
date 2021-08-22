@@ -1,0 +1,23 @@
+diff a/source/PauseSubState.hx b/source/PauseSubState.hx	(rejected hunks)
+@@ -1,5 +1,6 @@
+ package;
+ 
++import flixel.FlxCamera;
+ import flixel.input.gamepad.FlxGamepad;
+ import openfl.Lib;
+ #if windows
+@@ -97,6 +98,14 @@ class PauseSubState extends MusicBeatSubstate
+ 		changeSelection();
+ 
+ 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
++
++		#if mobileC
++		addVirtualPad(UP_DOWN, A);
++		var camcontrol = new FlxCamera();
++		FlxG.cameras.add(camcontrol);
++		camcontrol.bgColor.alpha = 0;
++		_virtualpad.cameras = [camcontrol];	
++		#end
+ 	}
+ 
+ 	override function update(elapsed:Float)

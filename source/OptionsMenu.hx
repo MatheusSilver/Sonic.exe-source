@@ -25,46 +25,35 @@ class OptionsMenu extends MusicBeatState
 	var curSelected:Int = 0;
 
 	var options:Array<OptionCategory> = [
-		new OptionCategory("Sonic exe", [
+		new OptionCategory("Sonic apk", [
 			new JumpscareOption("Toggle the usage of jumpscares (this lowers lag by alot)")
 		]),
 		new OptionCategory("Gameplay", [
 			new DFJKOption(controls),
-			new DownscrollOption("Change the layout of the strumline."),
-			new GhostTapOption("Ghost Tapping is when you tap a direction and it doesn't give you a miss."),
-			new Judgement("Customize your Hit Timings (LEFT or RIGHT)"),
-			#if desktop
-			new FPSCapOption("Cap your FPS"),
-			#end
-			new ScrollSpeedOption("Change your scroll speed (1 = Chart dependent)"),
+			new DownscrollOption("Para crias do Nexxy, Max e Marcelo"),
+			new GhostTapOption("Seja punido ou não pelos seus erros"),
 			new AccuracyDOption("Change how accuracy is calculated. (Accurate = Simple, Complex = Milisecond Based)"),
-			new ResetButtonOption("Toggle pressing R to gameover."),
-			// new OffsetMenu("Get a note offset based off of your inputs!"),
-			new CustomizeGameplay("Drag'n'Drop Gameplay Modules around to your preference")
+			new ResetButtonOption("Reinicie seu jogo direto depois de morrer (evita um jumpscare, FONTE: CONFIA!)")
 		]),
-		new OptionCategory("Appearance", [
-			new DistractionsAndEffectsOption("Toggle stage distractions that can hinder your gameplay."),
-			new CamZoomOption("Toggle the camera zoom in-game."),
-			#if desktop
-			new RainbowFPSOption("Make the FPS Counter Rainbow"),
-			new AccuracyOption("Display accuracy information."),
-			new NPSDisplayOption("Shows your current Notes Per Second."),
-			new SongPositionOption("Show the songs current position (as a bar)"),
-			new CpuStrums("CPU's strumline lights up when a note hits it."),
-			#end
+		new OptionCategory("Aparencia", [
+			new DistractionsAndEffectsOption("Esconde as distrações de cenário (Sinceramente, não faço ideia do que esse trem faz)"),
+			new CamZoomOption("pote que paliu OLHA O TAMANHO DESSE ZOOM MEU DEUS!!!"),
+			new AccuracyOption("Mostra sua precisão, geralmente é bem desbalanceada."),
+			new NPSDisplayOption("Mostra a quantidade de notas vindo por segundo"),
+			new SongPositionOption("Mostra o tempo de musica (como uma barra, bora pra academia?)"),
+			new CpuStrums("Faz as notas do oponente ganharem brilin")
 		]),
 		
-		new OptionCategory("Misc", [
-			#if desktop
-			new FPSOption("Toggle the FPS Counter"),
-			new ReplayOption("View replays"),
-			#end
-			new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
-			new WatermarkOption("Enable and disable all watermarks from the engine."),
-			new ShowInput("Display every single input in the score screen."),
-			new Optimization("No backgrounds, no characters, centered notes, no player 2."),
-			new BotPlay("Showcase your charts and mods with autoplay."),
-		])
+		new OptionCategory("trens", [
+			new FlashingLightsOption("Remove os efeitos de epilepsia como as estáticas aparecendo, (tambem melhora o desempenho)"),
+			new Optimization("Ahhhh mas silvi, meu celular é um tijolo... Ativa esse troço então mizera!"),
+			new BotPlay("Deixe o bot jogar por você (se tu ativar isso, é porque não tanka)")
+		])#if mobileC ,
+
+		new OptionCategory("Config Mobile", [
+			new CustomControls("O que será que isso faz?"),
+			new About("Sobre o maravilhoso portador dessa joça para android, sim ele é br!")
+		]) #end
 		
 	];
 
@@ -79,12 +68,12 @@ class OptionsMenu extends MusicBeatState
 	override function create()
 	{
 		instance = this;
-		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menuBGBlue"));
+		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image("BackGROUND2"));
 
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 		menuBG.updateHitbox();
 		menuBG.screenCenter();
-		menuBG.antialiasing = true;
+		menuBG.antialiasing = false;
 		add(menuBG);
 
 		grpControls = new FlxTypedGroup<Alphabet>();
@@ -114,6 +103,10 @@ class OptionsMenu extends MusicBeatState
 
 		FlxTween.tween(versionShit,{y: FlxG.height - 18},2,{ease: FlxEase.elasticInOut});
 		FlxTween.tween(blackBorder,{y: FlxG.height - 18},2, {ease: FlxEase.elasticInOut});
+
+		#if mobileC
+		addVirtualPad(FULL, A_B);
+		#end
 
 		super.create();
 	}
@@ -166,9 +159,9 @@ class OptionsMenu extends MusicBeatState
 				}
 			}
 			
-			if (FlxG.keys.justPressed.UP)
+			if (controls.UP_P)
 				changeSelection(-1);
-			if (FlxG.keys.justPressed.DOWN)
+			if (controls.DOWN_P)
 				changeSelection(1);
 			
 			if (isCat)
@@ -184,9 +177,9 @@ class OptionsMenu extends MusicBeatState
 						}
 					else
 					{
-						if (FlxG.keys.justPressed.RIGHT)
+						if (controls.RIGHT)
 							currentSelectedCat.getOptions()[curSelected].right();
-						if (FlxG.keys.justPressed.LEFT)
+						if (controls.LEFT)
 							currentSelectedCat.getOptions()[curSelected].left();
 					}
 				}

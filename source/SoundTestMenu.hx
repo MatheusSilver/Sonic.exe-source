@@ -14,6 +14,25 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
 
+
+import flixel.input.gamepad.FlxGamepad;
+import Controls.KeyboardScheme;
+import flixel.FlxG;
+import flixel.FlxObject;
+import flixel.FlxSprite;
+import flixel.effects.FlxFlicker;
+import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
+#if newgrounds
+import io.newgrounds.NG;
+#end
+import lime.app.Application;
+
 #if windows
 import Discord.DiscordClient;
 #end
@@ -67,7 +86,7 @@ class SoundTestMenu extends MusicBeatState
 			bg.setGraphicSize(Std.int(bg.width * 1));
 			bg.updateHitbox();
 			bg.screenCenter();
-			bg.antialiasing = true;
+			bg.antialiasing = false;
 			add(bg);
 
 			var soundtesttext = new FlxText(0, 0, 0, 'SOUND TEST', 25);
@@ -124,6 +143,10 @@ class SoundTestMenu extends MusicBeatState
 
 
 			add(whiteshit);
+			
+			#if mobileC
+			addVirtualPad(FULL, A_B);
+			#end
 
 			
         }
@@ -172,7 +195,7 @@ class SoundTestMenu extends MusicBeatState
 			flashyWashy(true);
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
-				LoadingState.loadAndSwitchState(new PlayState());
+				LoadingState.loadAndSwitchState(new PlayState(), true);
 			});
 		}
 		else if (first == 7 && second == 7)
@@ -188,7 +211,7 @@ class SoundTestMenu extends MusicBeatState
 				flashyWashy(true);
 				new FlxTimer().start(2, function(tmr:FlxTimer)
 				{
-					LoadingState.loadAndSwitchState(new PlayState());
+					LoadingState.loadAndSwitchState(new PlayState(), true);
 				});
 			}
 		else if (first == 3 && second == 1) 
@@ -197,16 +220,19 @@ class SoundTestMenu extends MusicBeatState
 			flashyWashy(true);
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
-				cameoImg.visible = true;
-				cameoImg.loadGraphic(Paths.image('cameostuff/Rightburst'));
-				flashyWashy(false);
-				FlxG.sound.music.stop();
+				LoadingState.loadAndSwitchState(new VideoState('assets/videos/bunda', new SoundTestMenu())); 
 
 			});
-			new FlxTimer().start(2.1, function(tmr:FlxTimer)
+		}
+
+		else if (first == 10 && second == 10) 
+		{
+			woahmanstopspammin = false;
+			flashyWashy(true);
+			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
-				FlxG.sound.playMusic(Paths.music('cameostuff/Rightburst'));	
-				incameo = true;
+				fancyOpenURL("https://youtu.be/u6mcs5nQHFY");
+
 			});
 		}
 		else if (first == 12 && second == 11)
@@ -215,43 +241,7 @@ class SoundTestMenu extends MusicBeatState
 			flashyWashy(true);
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
-				cameoBg.visible = true;
-				cameoBg.frames = Paths.getSparrowAtlas('cameostuff/VaniaBG');
-				FlxG.log.add(cameoBg.visible); 
-				cameoBg.animation.addByPrefix('wave', 'VaniaBG', 24, true);				
-				cameoImg.visible = true;
-				cameoBg.x -= 200;
-				cameoBg.y -= 100;
-				cameoImg.loadGraphic(Paths.image('cameostuff/Vania'));
-				cameoImg.x += 270;
-				cameoImg.y -= 50;
-				flashyWashy(false);
-				FlxG.sound.music.stop();
-			});
-			new FlxTimer().start(2.1, function(tmr:FlxTimer)
-			{
-				cameoBg.animation.play('wave');
-				FlxG.sound.playMusic(Paths.music('cameostuff/Vania'));	
-				incameo = true;
-			});
-		}
-		else if (first == 41 && second == 1) 
-		{
-			woahmanstopspammin = false;
-			flashyWashy(true);
-			new FlxTimer().start(2, function(tmr:FlxTimer)
-			{
-				cameoImg.visible = true;
-				cameoImg.loadGraphic(Paths.image('cameostuff/Razencro'));
-				cameoImg.setSize(1280, 720);
-				flashyWashy(false);
-				FlxG.sound.music.stop();
-
-			});
-			new FlxTimer().start(2.1, function(tmr:FlxTimer)
-			{
-				FlxG.sound.playMusic(Paths.music('cameostuff/Razencro'));	
-				incameo = true;
+				LoadingState.loadAndSwitchState(new VideoState('assets/videos/fufufufu', new SoundTestMenu())); 
 			});
 		}
 		else if (first == 69 && second == 27) 
@@ -260,17 +250,8 @@ class SoundTestMenu extends MusicBeatState
 			flashyWashy(true);
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
-				cameoImg.visible = true;
-				cameoImg.loadGraphic(Paths.image('cameostuff/Zekuta'));
-				cameoImg.setSize(1280, 720);
-				flashyWashy(false);
-				FlxG.sound.music.stop();
+				LoadingState.loadAndSwitchState(new VideoState('assets/videos/ONICHAN', new SoundTestMenu())); 
 
-			});
-			new FlxTimer().start(2.1, function(tmr:FlxTimer)
-			{
-				FlxG.sound.playMusic(Paths.music('cameostuff/Zekuta'));	
-				incameo = true;
 			});
 		}
 		else if (first == 6 && second == 9) 
@@ -279,7 +260,7 @@ class SoundTestMenu extends MusicBeatState
 				flashyWashy(true);
 				new FlxTimer().start(2, function(tmr:FlxTimer)
 				{
-					cameoImg.visible = true;
+					cameoImg.visible = true; //ACHO QUE EU IA TIRAR OS CRÉDITOS DOS MANOS SEU SAFADO???????
 					cameoBg.visible = true;
 					cameoThanks.visible = true;
 					cameoThanks.loadGraphic(Paths.image('cameostuff/thanks'));
@@ -310,36 +291,7 @@ class SoundTestMenu extends MusicBeatState
 			flashyWashy(true);
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
-				cameoImg.visible = true;
-				cameoImg.loadGraphic(Paths.image('cameostuff/Crybit'));
-				cameoImg.setSize(1280, 720);
-				flashyWashy(false);
-				FlxG.sound.music.stop();
-
-			});
-			new FlxTimer().start(2.1, function(tmr:FlxTimer)
-			{
-				FlxG.sound.playMusic(Paths.music('cameostuff/Crybit'));	
-				incameo = true;
-			});
-		}
-		else if (first == 32 && second == 8) 
-		{
-			woahmanstopspammin = false;
-			flashyWashy(true);
-			new FlxTimer().start(2, function(tmr:FlxTimer)
-			{
-				cameoImg.visible = true;
-				cameoImg.loadGraphic(Paths.image('cameostuff/Marstarbro'));
-				cameoImg.setSize(1280, 720);
-				flashyWashy(false);
-				FlxG.sound.music.stop();
-
-			});
-			new FlxTimer().start(2.1, function(tmr:FlxTimer)
-			{
-				FlxG.sound.playMusic(Paths.music('cameostuff/Marstarbro'));	
-				incameo = true;
+				LoadingState.loadAndSwitchState(new VideoState('assets/videos/Brado Retumbante', new SoundTestMenu())); 
 			});
 		}
 		else
@@ -358,17 +310,17 @@ class SoundTestMenu extends MusicBeatState
 		
 	override public function update(elapsed:Float)
 		{
-			if (FlxG.keys.justPressed.RIGHT || FlxG.keys.justPressed.LEFT || FlxG.keys.justPressed.A || FlxG.keys.justPressed.D) if (woahmanstopspammin) funnymonke = !funnymonke;
+			if (controls.RIGHT_P || controls.LEFT_P || FlxG.keys.justPressed.A || FlxG.keys.justPressed.D) if (woahmanstopspammin) funnymonke = !funnymonke;
 
-			if (FlxG.keys.justPressed.DOWN || FlxG.keys.justPressed.S) if (woahmanstopspammin) changeNumber(1);
+			if (controls.UP_P || FlxG.keys.justPressed.S) if (woahmanstopspammin) changeNumber(1);
 
-			if (FlxG.keys.justPressed.UP || FlxG.keys.justPressed.W) if (woahmanstopspammin) changeNumber(-1);
+			if (controls.DOWN_P || FlxG.keys.justPressed.W) if (woahmanstopspammin) changeNumber(-1);
 
-			if (FlxG.keys.justPressed.ENTER && woahmanstopspammin) doTheThing(pcmValue, daValue);
+			if (controls.ACCEPT && woahmanstopspammin) doTheThing(pcmValue, daValue);
 
-			if (FlxG.keys.justPressed.ENTER && !woahmanstopspammin && incameo) LoadingState.loadAndSwitchState(new SoundTestMenu());
+			if (controls.ACCEPT && !woahmanstopspammin && incameo) LoadingState.loadAndSwitchState(new SoundTestMenu());
 
-			if (FlxG.keys.justPressed.ESCAPE && woahmanstopspammin && !incameo) LoadingState.loadAndSwitchState(new MainMenuState());
+			if (controls.BACK && woahmanstopspammin && !incameo) LoadingState.loadAndSwitchState(new MainMenuState());
 
 			if (funnymonke)
 			{

@@ -10,7 +10,7 @@ class KadeEngineData
 			FlxG.save.data.jumpscares = true;
 
 		if (FlxG.save.data.soundTestUnlocked == null)
-			FlxG.save.data.soundTestUnlocked = false;
+			FlxG.save.data.soundTestUnlocked = true;
 
         if (FlxG.save.data.newInput == null)
 			FlxG.save.data.newInput = true;
@@ -68,10 +68,10 @@ class KadeEngineData
 			FlxG.save.data.ghost = true;
 
 		if (FlxG.save.data.distractions == null)
-			FlxG.save.data.distractions = true;
+			FlxG.save.data.distractions = false;
 
 		if (FlxG.save.data.flashing == null)
-			FlxG.save.data.flashing = true;
+			FlxG.save.data.flashing = false;
 
 		if (FlxG.save.data.resetButton == null)
 			FlxG.save.data.resetButton = false;
@@ -89,10 +89,10 @@ class KadeEngineData
 			FlxG.save.data.customStrumLine = 0;
 
 		if (FlxG.save.data.camzoom == null)
-			FlxG.save.data.camzoom = true;
+			FlxG.save.data.camzoom = false;
 
 		if (FlxG.save.data.scoreScreen == null)
-			FlxG.save.data.scoreScreen = true;
+			FlxG.save.data.scoreScreen = false;
 
 		if (FlxG.save.data.inputShow == null)
 			FlxG.save.data.inputShow = false;

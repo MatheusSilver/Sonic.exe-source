@@ -1,0 +1,25 @@
+diff a/source/OptionsMenu.hx b/source/OptionsMenu.hx	(rejected hunks)
+@@ -171,9 +171,9 @@ class OptionsMenu extends MusicBeatState
+ 				}
+ 			}
+ 			
+-			if (FlxG.keys.justPressed.UP)
++			if (controls.UP_P)
+ 				changeSelection(-1);
+-			if (FlxG.keys.justPressed.DOWN)
++			if (controls.DOWN_P)
+ 				changeSelection(1);
+ 			
+ 			if (isCat)
+@@ -189,9 +189,9 @@ class OptionsMenu extends MusicBeatState
+ 						}
+ 					else
+ 					{
+-						if (FlxG.keys.justPressed.RIGHT)
++						if (controls.RIGHT)
+ 							currentSelectedCat.getOptions()[curSelected].right();
+-						if (FlxG.keys.justPressed.LEFT)
++						if (controls.LEFT)
+ 							currentSelectedCat.getOptions()[curSelected].left();
+ 					}
+ 				}

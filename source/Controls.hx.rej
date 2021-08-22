@@ -1,0 +1,11 @@
+diff a/source/Controls.hx b/source/Controls.hx	(rejected hunks)
+@@ -11,6 +11,9 @@ import flixel.input.actions.FlxActionSet;
+ import flixel.input.gamepad.FlxGamepadButton;
+ import flixel.input.gamepad.FlxGamepadInputID;
+ import flixel.input.keyboard.FlxKey;
++import ui.Hitbox;
++import ui.FlxVirtualPad;
++import flixel.ui.FlxButton;
+ 
+ #if (haxe >= "4.0.0")
+ enum abstract Action(String) to String from String

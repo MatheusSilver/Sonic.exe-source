@@ -1,0 +1,27 @@
+From 460b2ed270b6bfa817149027672201a2b2789a36 Mon Sep 17 00:00:00 2001
+From: "lucky@dog.7" <l@d.7>
+Date: Mon, 26 Jul 2021 18:14:18 +0300
+Subject: [PATCH 4/4] fix input freeplay
+
+---
+ source/FreeplayState.hx | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/source/FreeplayState.hx b/source/FreeplayState.hx
+index 96ec98e..e05e632 100644
+--- a/source/FreeplayState.hx
++++ b/source/FreeplayState.hx
+@@ -145,6 +145,10 @@ class FreeplayState extends MusicBeatState
+ 			trace(md);
+ 		 */
+ 
++		#if mobileC
++		addVirtualPad(FULL, A_B);
++		#end
++
+ 		super.create();
+ 	}
+ 
+-- 
+2.32.0.windows.1
+

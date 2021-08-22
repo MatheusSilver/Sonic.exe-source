@@ -134,7 +134,7 @@ class Note extends FlxSprite
 								setGraphicSize(Std.int(width * 0.7));
 								
 								updateHitbox();
-								antialiasing = true;
+								antialiasing = false;
 							}
 							default:
 							{
@@ -156,7 +156,7 @@ class Note extends FlxSprite
  
 								setGraphicSize(Std.int(width * 0.7));
 								updateHitbox();
-								antialiasing = true;
+								antialiasing = false;
 							}
 						}
 
@@ -192,7 +192,7 @@ class Note extends FlxSprite
 								setGraphicSize(Std.int(width * 0.7));
 								
 								updateHitbox();
-								antialiasing = true;
+								antialiasing = false;
 							}
 							default:
 							{
@@ -214,7 +214,7 @@ class Note extends FlxSprite
  
 								setGraphicSize(Std.int(width * 0.7));
 								updateHitbox();
-								antialiasing = true;
+								antialiasing = false;
 							}
 						}
 			}

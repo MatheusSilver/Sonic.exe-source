@@ -13,7 +13,9 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+#if newgrounds
 import io.newgrounds.NG;
+#end
 import lime.app.Application;
 
 #if windows
@@ -78,7 +80,7 @@ class MainMenuState extends MusicBeatState
 		bg.setGraphicSize(Std.int(bg.width * .5));
 		bg.updateHitbox();
 		bg.screenCenter();
-		bg.antialiasing = true;
+		bg.antialiasing = false;
 		add(bg);
 
 		bgdesat = new FlxSprite(-80).loadGraphic(Paths.image('backgroundlool2'));
@@ -88,7 +90,7 @@ class MainMenuState extends MusicBeatState
 		bgdesat.updateHitbox();
 		bgdesat.screenCenter();
 		bgdesat.visible = false;
-		bgdesat.antialiasing = true;
+		bgdesat.antialiasing = false;
 		bgdesat.color = 0xFFfd719b;
 		add(bgdesat);
 		// bgdesat.scrollFactor.set();
@@ -97,14 +99,14 @@ class MainMenuState extends MusicBeatState
 		spikeUp.scrollFactor.x = 0;
 		spikeUp.scrollFactor.y = 0;
 		spikeUp.updateHitbox();
-		spikeUp.antialiasing = true;
+		spikeUp.antialiasing = false;
 		add(spikeUp);
 
 		spikeDown = new FlxSprite(-60 , 630).loadGraphic(Paths.image('spikeDown'));
 		spikeDown.scrollFactor.x = 0;
 		spikeDown.scrollFactor.y = 0;
 		spikeDown.updateHitbox();
-		spikeDown.antialiasing = true;
+		spikeDown.antialiasing = false;
 		add(spikeDown);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -128,7 +130,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set();
-			menuItem.antialiasing = true;
+			menuItem.antialiasing = false;
 			if (firstStart)
 				FlxTween.tween(menuItem,{y: 100 + (i * 100)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
 					{ 
@@ -157,6 +159,10 @@ class MainMenuState extends MusicBeatState
 			controls.setKeyboardScheme(KeyboardScheme.Duo(true), true);
 
 		changeItem();
+
+		#if mobileC
+		addVirtualPad(UP_DOWN, A);
+		#end
 
 		super.create();
 	}
@@ -214,13 +220,13 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 
-			if (FlxG.keys.justPressed.UP)
+			if (controls.UP_P)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				changeItem(-1);
 			}
 
-			if (FlxG.keys.justPressed.DOWN)
+			if (controls.DOWN_P)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				changeItem(1);
@@ -236,7 +242,7 @@ class MainMenuState extends MusicBeatState
 			{
 				if (optionShit[curSelected] == 'donate')
 				{
-					fancyOpenURL("https://ninja-muffin24.itch.io/funkin");
+					LoadingState.loadAndSwitchState(new CreditState());
 				}
 				else
 				{
@@ -295,18 +301,18 @@ class MainMenuState extends MusicBeatState
 		switch (daChoice)
 		{
 			case 'story mode':
-				FlxG.switchState(new StoryMenuState());
+				FlxG.switchState(new UnlockScreen(true, 'soundtest'));
 				trace("Story Menu Selected");
 			case 'freeplay':
-				FlxG.switchState(new FreeplayState());
+				LoadingState.loadAndSwitchState(new FreeplayState());
 
 				trace("Freeplay Menu Selected");
 
 			case 'options':
-				FlxG.switchState(new OptionsMenu());
+				LoadingState.loadAndSwitchState(new OptionsMenu());
 				trace("going to da options");
 			case 'sound test':
-				FlxG.switchState(new SoundTestMenu());
+				LoadingState.loadAndSwitchState(new SoundTestMenu());
 				trace("going to da sound test menu");
 		}
 	}

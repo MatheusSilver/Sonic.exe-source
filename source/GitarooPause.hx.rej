@@ -1,0 +1,12 @@
+diff a/source/GitarooPause.hx b/source/GitarooPause.hx	(rejected hunks)
+@@ -47,6 +47,10 @@ class GitarooPause extends MusicBeatState
+ 
+ 		changeThing();
+ 
++		#if mobileC
++		addVirtualPad(LEFT_RIGHT, A_B);
++		#end
++
+ 		super.create();
+ 	}
+ 

@@ -1,0 +1,53 @@
+diff a/source/PlayState.hx b/source/PlayState.hx	(rejected hunks)
+@@ -228,6 +229,10 @@ class PlayState extends MusicBeatState
+ 
+ 	private var executeModchart = false;
+ 
++	#if mobileC
++	var mcontrols:Mobilecontrols; 
++	#end
++
+ 	// API stuff
+ 	
+ 	public function addObject(object:FlxBasic) { add(object); }
+@@ -1226,6 +1254,10 @@ class PlayState extends MusicBeatState
+ 
+ 	function startCountdown():Void
+ 	{
++		#if mobileC
++		mcontrols.visible = true;
++		#end
++
+ 		inCutscene = false;
+ 
+ 		generateStaticArrows(0);
+@@ -2007,7 +2039,7 @@ class PlayState extends MusicBeatState
+ 
+ 		scoreTxt.x = (originalX - (lengthInPx / 2)) + 335;
+ 
+-		if (controls.PAUSE && startedCountdown && canPause)
++		if (controls.PAUSE #if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
+ 		{
+ 			persistentUpdate = false;
+ 			persistentDraw = true;
+@@ -2657,6 +2689,10 @@ class PlayState extends MusicBeatState
+ 
+ 	function endSong():Void
+ 	{
++		#if mobileC
++		mcontrols.visible = false;
++		#end
++
+ 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN,handleInput);
+ 		if (useVideo)
+ 			{
+@@ -2755,7 +2791,9 @@ class PlayState extends MusicBeatState
+ 
+ 					if (SONG.validScore)
+ 					{
++						#if newgrounds
+ 						NGio.unlockMedal(60961);
++						#end
+ 						Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
+ 					}
+ 

@@ -25,7 +25,7 @@ class StoryModeMenuBFidle extends FlxSprite
 
 
             var tex:FlxAtlasFrames;
-            antialiasing = true;
+            antialiasing = false;
 
             tex = Paths.getSparrowAtlas('characters/BOYFRIEND', 'shared');
 			frames = tex;

@@ -1,0 +1,11 @@
+diff a/source/KeyBindMenu.hx b/source/KeyBindMenu.hx	(rejected hunks)
+@@ -19,7 +19,9 @@ import flixel.text.FlxText;
+ import flixel.tweens.FlxEase;
+ import flixel.tweens.FlxTween;
+ import flixel.util.FlxColor;
++#if newgrounds
+ import io.newgrounds.NG;
++#end
+ import lime.app.Application;
+ import lime.utils.Assets;
+ import flixel.math.FlxMath;

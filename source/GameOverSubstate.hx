@@ -11,6 +11,7 @@ import flixel.FlxSubState;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.FlxCamera;
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -85,7 +86,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		sonicDEATH.scale.x = 2;
 		sonicDEATH.scale.y = 2;
 
-		sonicDEATH.antialiasing = true;
+		sonicDEATH.antialiasing = false;
 
 		if (PlayState.SONG.song.toLowerCase() != 'endless')
 			{
@@ -106,7 +107,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		add(bf);
 
 		majinBf.visible = false;
-		majinBf.antialiasing = true;
+		majinBf.antialiasing = false;
 
 		topMajins = new FlxSprite(bf.x - 50 - 200 - 250, bf.y - 300).loadGraphic(Paths.image('topMajins', 'exe'));
 		topMajins.scale.x = 1.1;
@@ -126,6 +127,15 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		FlxG.camera.scroll.set();
 		FlxG.camera.target = null;
+
+		#if mobileC
+		addVirtualPad(NONE, A_B);
+		var camcontrol = new FlxCamera();
+		FlxG.cameras.add(camcontrol);
+		camcontrol.bgColor.alpha = 0;
+		_virtualpad.cameras = [camcontrol];
+		#end
+
 
 		bf.playAnim('firstDeath');
 		sonicDEATH.playAnim('firstDEATH');

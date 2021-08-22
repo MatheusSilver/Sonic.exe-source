@@ -19,7 +19,7 @@ class UnlockScreen extends MusicBeatState
         {
             if (isUnlocked)
             {
-                image = new FlxSprite().loadGraphic(Paths.image('unlockscreen/Special', 'exe'));
+                image = new FlxSprite().loadGraphic(Paths.image('unlockscreen/Harder', 'exe'));
                 FlxG.save.data.soundTestUnlocked = true;
             }
             else
@@ -38,6 +38,10 @@ class UnlockScreen extends MusicBeatState
         {
             FlxTween.tween(image, {alpha: 1}, 1);
         });
+        
+		#if mobileC
+		addVirtualPad(NONE, A);
+		#end
 
         super.create();
     }
@@ -46,7 +50,7 @@ class UnlockScreen extends MusicBeatState
     {
         if (controls.ACCEPT)
         {
-            LoadingState.loadAndSwitchState(new MainMenuState());
+			LoadingState.loadAndSwitchState(new StoryMenuState());
         }
         
         super.update(elapsed);

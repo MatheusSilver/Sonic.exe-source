@@ -1,0 +1,38 @@
+<xml>
+
+    <files id='haxe'>
+
+        <compilerflag value='-I${LINC_LUA_PATH}/linc/'/>
+        <file name='${LINC_LUA_PATH}linc/linc_lua.cpp' />
+
+    </files>
+
+    <files id="__main__">
+        <compilerflag value='-I${LINC_LUA_PATH}linc/'/>
+    </files>
+    
+    <section if="android" unless="NO_PRECOMPILED_HEADERS">
+    <echo value=" "/>
+    <echo value=" "/>
+    <echo value="!!!!! you should compile with '-D NO_PRECOMPILED_HEADERS' on android targets !!!!!"/>
+    <echo value=" "/>
+    <echo value=" "/>
+    </section>
+    
+    <target id="haxe">
+        <section if="windows">
+            <lib name='${LINC_LUA_PATH}lib/Lua/lib/Windows64/lua51.lib' if='HXCPP_M64' />
+            <lib name='${LINC_LUA_PATH}lib/Lua/lib/Windows/lua51.lib' if='HXCPP_M32' />
+        </section>
+
+	    <section if="android">
+            <lib name='${LINC_LUA_PATH}lib/Lua/lib/Android/arm/libluajit.so' if='HXCPP_ARMV7' />
+            <!-- <lib name='${LINC_LUA_PATH}lib/Lua/lib/Android/arm64/libluajit.a' if='HXCPP_ARM64' /> i think 64 not working, I THINK-->
+            <lib name='${LINC_LUA_PATH}lib/Lua/lib/Android/x86/libluajit.so' if='HXCPP_X86' />
+
+            
+
+        </section>
+    </target>
+
+</xml>

@@ -1,0 +1,23 @@
+diff a/source/GameOverSubstate.hx b/source/GameOverSubstate.hx	(rejected hunks)
+@@ -1,5 +1,6 @@
+ package;
+ 
++import flixel.FlxCamera;
+ import flixel.FlxG;
+ import flixel.FlxObject;
+ import flixel.FlxSubState;
+@@ -45,6 +46,14 @@ class GameOverSubstate extends MusicBeatSubstate
+ 		FlxG.camera.scroll.set();
+ 		FlxG.camera.target = null;
+ 
++		#if mobileC
++		addVirtualPad(NONE, A_B);
++		var camcontrol = new FlxCamera();
++		FlxG.cameras.add(camcontrol);
++		camcontrol.bgColor.alpha = 0;
++		_virtualpad.cameras = [camcontrol];
++		#end
++
+ 		bf.playAnim('firstDeath');
+ 	}
+ 

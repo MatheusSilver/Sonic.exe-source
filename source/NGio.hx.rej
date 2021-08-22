@@ -1,0 +1,12 @@
+diff a/source/NGio.hx b/source/NGio.hx	(rejected hunks)
+@@ -1,3 +1,4 @@
++#if newgrounds
+ package;
+ 
+ import flixel.FlxG;
+@@ -198,3 +199,4 @@ class NGio
+ 		}
+ 	}
+ }
++#end
+\ No newline at end of file

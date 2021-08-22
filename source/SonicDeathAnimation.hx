@@ -25,7 +25,7 @@ class SonicDeathAnimation extends FlxSprite
 
 
             var tex:FlxAtlasFrames;
-            antialiasing = true;
+            antialiasing = false;
 
             tex = Paths.getSparrowAtlas('characters/DeathScreenSonicExe');
 			frames = tex;

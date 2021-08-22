@@ -1,0 +1,36 @@
+diff a/source/Main.hx b/source/Main.hx	(rejected hunks)
+@@ -25,6 +25,10 @@ class Main extends Sprite
+ 
+ 	public static var watermarks = true; // Whether to put Kade Engine liteartly anywhere
+ 
++	#if android
++	public static var path = lime.system.System.applicationStorageDirectory; // path to storage folder
++	#end
++
+ 	// You can pretty much ignore everything from here on - your code should go in your states.
+ 
+ 	public static function main():Void
+@@ -75,7 +79,7 @@ class Main extends Sprite
+ 			gameHeight = Math.ceil(stageHeight / zoom);
+ 		}
+ 
+-		#if cpp
++		#if (cpp && !mobile)
+ 		initialState = Caching;
+ 		game = new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen);
+ 		#else
+@@ -83,12 +87,12 @@ class Main extends Sprite
+ 		#end
+ 		addChild(game);
+ 		
+-		#if !mobile
++		//#if !mobile
+ 		fpsCounter = new FPS(10, 3, 0xFFFFFF);
+ 		addChild(fpsCounter);
+ 		toggleFPS(FlxG.save.data.fps);
+ 
+-		#end
++		//#end
+ 	}
+ 
+ 	var game:FlxGame;
