@@ -199,21 +199,21 @@ class SoundTestMenu extends MusicBeatState
 			});
 		}
 		else if (first == 7 && second == 7)
+		{
+			woahmanstopspammin = false;
+			PlayStateChangeables.nocheese = false;
+			PlayState.SONG = Song.loadFromJson('execution', 'execution');
+			PlayState.isStoryMode = false;
+			PlayState.storyDifficulty = 1;
+			PlayState.storyWeek = 1;
+			FlxTransitionableState.skipNextTransIn = true;
+			FlxTransitionableState.skipNextTransOut = true;
+			flashyWashy(true);
+			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
-				woahmanstopspammin = false;
-				PlayStateChangeables.nocheese = false;
-				PlayState.SONG = Song.loadFromJson('execution-hard', 'execution');
-				PlayState.isStoryMode = false;
-				PlayState.storyDifficulty = 2;
-				PlayState.storyWeek = 1;
-				FlxTransitionableState.skipNextTransIn = true;
-				FlxTransitionableState.skipNextTransOut = true;
-				flashyWashy(true);
-				new FlxTimer().start(2, function(tmr:FlxTimer)
-				{
-					LoadingState.loadAndSwitchState(new PlayState(), true);
-				});
-			}
+				LoadingState.loadAndSwitchState(new PlayState(), true);
+			});
+		}
 		else if (first == 3 && second == 1) 
 		{
 			woahmanstopspammin = false;

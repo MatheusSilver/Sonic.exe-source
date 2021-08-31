@@ -46,7 +46,6 @@ class OptionsMenu extends MusicBeatState
 		
 		new OptionCategory("trens", [
 			new FlashingLightsOption("Remove os efeitos de epilepsia como as estáticas aparecendo, (tambem melhora o desempenho)"),
-			new Optimization("Ahhhh mas silvi, meu celular é um tijolo... Ativa esse troço então mizera!"),
 			new BotPlay("Deixe o bot jogar por você (se tu ativar isso, é porque não tanka)")
 		])#if mobileC ,
 
