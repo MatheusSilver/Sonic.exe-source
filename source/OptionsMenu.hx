@@ -40,8 +40,7 @@ class OptionsMenu extends MusicBeatState
 			new CamZoomOption("pote que paliu OLHA O TAMANHO DESSE ZOOM MEU DEUS!!!"),
 			new AccuracyOption("Mostra sua precisão, geralmente é bem desbalanceada."),
 			new NPSDisplayOption("Mostra a quantidade de notas vindo por segundo"),
-			new SongPositionOption("Mostra o tempo de musica (como uma barra, bora pra academia?)"),
-			new CpuStrums("Faz as notas do oponente ganharem brilin")
+			new SongPositionOption("Mostra o tempo de musica (como uma barra, bora pra academia?)")
 		]),
 		
 		new OptionCategory("trens", [

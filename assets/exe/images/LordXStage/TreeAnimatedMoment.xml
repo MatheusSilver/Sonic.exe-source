@@ -12,5 +12,5 @@
 	<SubTexture name="TreeAnimated0007" x="786" y="627" width="393" height="627"/>
 	<SubTexture name="TreeAnimated0008" x="1179" y="627" width="393" height="627"/>
 	<SubTexture name="TreeAnimated0009" x="1572" y="627" width="393" height="627"/>
-	<SubTexture name="TreeAnimated0010" x="0" y="1254" width="393" height="627"/>
+	<SubTexture name="TreeAnimated0010" x="0" y="0" width="393" height="627"/>
 </TextureAtlas>
